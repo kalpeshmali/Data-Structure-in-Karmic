@@ -9,17 +9,24 @@ typedef struct BstNode
 NODE* Insert(NODE *root,int data);
 int Search(NODE*,int);
 void display(NODE*);
+void minElement(NODE*);
+void maxElement(NODE* root);
 int main()
 {
 	NODE *root;
 	root =NULL;
 	root=Insert(root,15);
 	root=Insert(root,10);
-	root=Insert(root,20);
-	root=Insert(root,25);
-	root=Insert(root,8);
 	root=Insert(root,12);
+	root=Insert(root,8);
+	root=Insert(root,3);
+	root=Insert(root,13);
+	root=Insert(root,17);
+	root=Insert(root,200);
+	root=Insert(root,21);
 	display(root);
+	minElement(root);
+	maxElement(root);
 	if(Search(root,8))
 	{
 		printf(" 8 Element is found\n");	
@@ -78,5 +85,41 @@ void display(NODE *cnode)
         printf("%d \n", cnode->data); 
         display(cnode->right); 
     } 
+}
+void minElement(NODE* root)
+{
+	NODE *temp;
+	int temp1;
+	temp=root;
+	temp1=temp->data;
+	while(temp!=NULL)
+	{
+		if(temp->data <= temp1);
+		{
+			temp1=temp->data;
+		}
+		temp=temp->left;
+	}
+	printf("The Minimum  Element is %d\n",temp1);
+}
+void maxElement(NODE* root)
+{
+	NODE *temp;
+	int temp1;
+	temp=root;
+	temp1=temp->data;
+	while(1)
+	{
+		if(temp->data >= temp1);
+		{
+			temp1=temp->data;
+		}
+		if(temp->right == NULL)
+		{
+			break;
+		}
+		temp=temp->right;
+	}
+	printf("The Maximum Element is %d\n",temp1);
 }
 
