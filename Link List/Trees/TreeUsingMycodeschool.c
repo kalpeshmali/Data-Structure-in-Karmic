@@ -6,13 +6,16 @@ typedef struct BstNode
 	struct BstNode *left;
 	struct BstNode *right;
 }NODE;
+
 NODE* Insert(NODE *root,int data);
 int Search(NODE*,int);
 void display(NODE*);
 void minElement(NODE*);
-void maxElement(NODE* root);
+void maxElement(NODE*);
+int treeHeight(NODE*,int);
 int main()
 {
+	int count;
 	NODE *root;
 	root =NULL;
 	root=Insert(root,15);
@@ -27,6 +30,7 @@ int main()
 	display(root);
 	minElement(root);
 	maxElement(root);
+	printf("tree height = %d\n",(treeHeight(root,0)-1));
 	if(Search(root,8))
 	{
 		printf(" 8 Element is found\n");	
@@ -121,5 +125,19 @@ void maxElement(NODE* root)
 		temp=temp->right;
 	}
 	printf("The Maximum Element is %d\n",temp1);
+}
+int treeHeight(NODE *cnode,int level)    //Height Of Tree
+{
+	static int height=0;
+	if(height<level)
+	{
+		height=level;
+	} 
+	if(cnode != NULL) 
+    { 
+        treeHeight(cnode->left,level+1); 
+        treeHeight(cnode->right,level+1);       
+	}
+    return height;
 }
 
